@@ -4,3 +4,6 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+      time: "17:00"
+      # Use Japan Standard Time (UTC +09:00)
+      timezone: "Asia/Tokyo"
