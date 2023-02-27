@@ -5,10 +5,9 @@ import com.rbleuse.redditclonekotlin.entity.User
 import com.rbleuse.redditclonekotlin.entity.Vote
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
-import java.util.*
 
 @Repository
 interface VoteRepository : JpaRepository<Vote, Long> {
 
-    fun findTopByPostAndPost_UserOrderByVoteIdDesc(post: Post, user: User): Optional<Vote>
+    fun findTopByPostAndPost_UserOrderByVoteIdDesc(post: Post, user: User): Vote?
 }

@@ -31,6 +31,7 @@ class User(
 
     val creationDate: Instant = Instant.now()
 
+    // FIXME
     var accountStatus: Boolean = false
 
     fun isNew(): Boolean = userId == null

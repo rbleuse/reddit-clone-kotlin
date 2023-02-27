@@ -71,7 +71,7 @@ class AuthService(
 
     fun verifyToken(token: String) {
         val verificationToken = tokenRepository.findByToken(token) ?: throw ActivationException(
-            "Invalid Activation Token",
+            "Invalid Activation Token"
         )
 
         enableAccount(verificationToken)

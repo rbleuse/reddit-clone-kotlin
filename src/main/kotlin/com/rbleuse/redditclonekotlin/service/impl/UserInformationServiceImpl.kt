@@ -20,9 +20,8 @@ class UserInformationServiceImpl(private val userRepository: UserRepository) : U
 
     @Transactional(readOnly = true)
     override fun loadUserByUsername(username: String): UserDetails {
-        val optionalUser = userRepository.findByUsername(username)
-
-        val user = optionalUser ?: throw UsernameNotFoundException("No user found with username: $username")
+        val user = userRepository.findByUsername(username)
+            ?: throw UsernameNotFoundException("User not found with username: $username")
 
         return User(
             user.username,

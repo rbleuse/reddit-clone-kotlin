@@ -15,8 +15,8 @@ class MailService(private val javaMailSender: JavaMailSender, private val mailBu
 
     @Async
     fun sendEmail(notificationEmail: NotificationEmail) {
-        val messagePreparator = MimeMessagePreparator { mimeMessage: MimeMessage? ->
-            val messageHelper = MimeMessageHelper(mimeMessage!!)
+        val messagePreparator = MimeMessagePreparator { mimeMessage ->
+            val messageHelper = MimeMessageHelper(mimeMessage)
             messageHelper.setFrom("activation@redditclone.com")
             messageHelper.setTo(notificationEmail.recipient)
             messageHelper.setSubject(notificationEmail.subject)
