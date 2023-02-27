@@ -1,9 +1,16 @@
 package com.rbleuse.redditclonekotlin.entity
 
+import jakarta.persistence.Entity
+import jakarta.persistence.FetchType
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
+import jakarta.persistence.Id
+import jakarta.persistence.JoinColumn
+import jakarta.persistence.ManyToOne
+import jakarta.persistence.Table
+import jakarta.validation.constraints.NotEmpty
 import org.hibernate.Hibernate
 import java.time.Instant
-import javax.persistence.*
-import javax.validation.constraints.NotEmpty
 
 @Table(name = "comment")
 @Entity
@@ -23,7 +30,7 @@ class Comment(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", referencedColumnName = "userId")
-    val user: User
+    val user: User,
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

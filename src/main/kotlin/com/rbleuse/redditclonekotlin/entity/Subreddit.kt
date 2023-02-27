@@ -1,10 +1,17 @@
 package com.rbleuse.redditclonekotlin.entity
 
+import jakarta.persistence.Entity
+import jakarta.persistence.FetchType
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
+import jakarta.persistence.Id
+import jakarta.persistence.ManyToOne
+import jakarta.persistence.OneToMany
+import jakarta.persistence.SequenceGenerator
+import jakarta.persistence.Table
+import jakarta.validation.constraints.NotBlank
 import org.hibernate.Hibernate
 import java.time.Instant
-import javax.persistence.*
-import javax.validation.constraints.NotBlank
-
 
 @Table(name = "subreddit")
 @Entity
@@ -26,7 +33,7 @@ class Subreddit(
     val creationDate: Instant,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    val user: User
+    val user: User,
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

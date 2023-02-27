@@ -1,10 +1,15 @@
 package com.rbleuse.redditclonekotlin.entity
 
+import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
+import jakarta.persistence.Id
+import jakarta.persistence.SequenceGenerator
+import jakarta.persistence.Table
+import jakarta.validation.constraints.Email
+import jakarta.validation.constraints.NotBlank
 import org.hibernate.Hibernate
 import java.time.Instant
-import javax.persistence.*
-import javax.validation.constraints.Email
-import javax.validation.constraints.NotBlank
 
 @Table(name = "users")
 @Entity

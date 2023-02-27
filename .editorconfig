@@ -1,0 +1,3 @@
+[*.{kt,kts}]
+ktlint_code_style = official
+insert_final_newline = true

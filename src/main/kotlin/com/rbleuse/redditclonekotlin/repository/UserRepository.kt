@@ -2,9 +2,10 @@ package com.rbleuse.redditclonekotlin.repository
 
 import com.rbleuse.redditclonekotlin.entity.User
 import org.springframework.data.jpa.repository.JpaRepository
-import java.util.*
+import org.springframework.stereotype.Repository
 
+@Repository
 interface UserRepository : JpaRepository<User, Long> {
 
-    fun findByUsername(username: String): Optional<User>
+    fun findByUsername(username: String): User?
 }
