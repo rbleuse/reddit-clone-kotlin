@@ -33,7 +33,7 @@ class Subreddit(
     val creationDate: Instant,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    val user: User,
+    val user: User
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

@@ -22,7 +22,7 @@ class User(
 
     @Email
     @NotBlank(message = "Email is required")
-    val email: String,
+    val email: String
 ) {
     @Id
     @SequenceGenerator(name = "USER_GEN", sequenceName = "SEQ_USER", allocationSize = 1)

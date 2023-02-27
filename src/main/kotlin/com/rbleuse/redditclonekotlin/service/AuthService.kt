@@ -48,7 +48,8 @@ class AuthService(
     fun login(loginRequest: LoginRequest): AuthResponse {
         val authenticate = authenticationManager.authenticate(
             UsernamePasswordAuthenticationToken(
-                loginRequest.username, loginRequest.password
+                loginRequest.username,
+                loginRequest.password
             )
         )
         SecurityContextHolder.createEmptyContext().authentication = authenticate

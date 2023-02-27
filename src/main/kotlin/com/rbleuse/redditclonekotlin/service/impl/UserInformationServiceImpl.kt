@@ -30,7 +30,7 @@ class UserInformationServiceImpl(private val userRepository: UserRepository) : U
             true,
             true,
             true,
-            fetchAuths("USER"),
+            fetchAuths("USER")
         )
     }
 }

@@ -16,7 +16,7 @@ class AccountVerificationToken(
     val token: String,
 
     @OneToOne(fetch = FetchType.LAZY)
-    val user: User,
+    val user: User
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

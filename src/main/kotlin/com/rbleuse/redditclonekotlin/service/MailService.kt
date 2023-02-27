@@ -2,7 +2,6 @@ package com.rbleuse.redditclonekotlin.service
 
 import com.rbleuse.redditclonekotlin.exception.ActivationException
 import com.rbleuse.redditclonekotlin.model.NotificationEmail
-import jakarta.mail.internet.MimeMessage
 import org.springframework.mail.MailException
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.mail.javamail.MimeMessageHelper

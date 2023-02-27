@@ -30,7 +30,7 @@ class Comment(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", referencedColumnName = "userId")
-    val user: User,
+    val user: User
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

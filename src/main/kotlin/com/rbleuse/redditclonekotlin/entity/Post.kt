@@ -40,7 +40,7 @@ class Post(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id", referencedColumnName = "id")
-    val subreddit: Subreddit,
+    val subreddit: Subreddit
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

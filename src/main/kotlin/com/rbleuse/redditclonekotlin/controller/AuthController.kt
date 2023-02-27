@@ -4,7 +4,6 @@ import com.rbleuse.redditclonekotlin.dto.AuthResponse
 import com.rbleuse.redditclonekotlin.dto.LoginRequest
 import com.rbleuse.redditclonekotlin.dto.RegisterRequest
 import com.rbleuse.redditclonekotlin.service.AuthService
-import org.springframework.http.RequestEntity
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable

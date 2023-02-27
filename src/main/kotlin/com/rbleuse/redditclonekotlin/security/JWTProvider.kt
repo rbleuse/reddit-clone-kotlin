@@ -16,7 +16,7 @@ class JWTProvider {
         try {
             keystore = KeyStore.getInstance("JKS")
             val resourceStream = this.javaClass.getResourceAsStream("/keystore.jks")
-            keystore.load(resourceStream, "test123".toCharArray());
+            keystore.load(resourceStream, "test123".toCharArray())
         } catch (ex: Exception) {
             throw ActivationException("Exception occured while loading keystore")
         }
