@@ -9,10 +9,9 @@ import org.testcontainers.junit.jupiter.Testcontainers
 
 @DataJpaTest
 @Testcontainers
-class UserRepositoryTest {
-
-    @Autowired
-    private lateinit var userRepository: UserRepository
+class UserRepositoryTest @Autowired constructor(
+    private val userRepository: UserRepository
+) {
 
     @Test
     fun `When findByUsername then return User`() {
