@@ -34,7 +34,7 @@ dependencies {
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 	implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
 	implementation("com.github.javafaker:javafaker:1.0.2")
-	implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+	implementation("io.jsonwebtoken:jjwt-api:0.12.2")
 	implementation("com.github.marlonlom:timeago:4.0.3")
 
 	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.2")
