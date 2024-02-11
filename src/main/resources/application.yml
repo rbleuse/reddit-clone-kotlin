@@ -1,0 +1,21 @@
+spring:
+  sql:
+    init:
+      mode: ALWAYS
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+      hibernate.column_ordering_strategy: legacy
+    generate-ddl: true
+    open-in-view: false
+  cache:
+    type: REDIS
+  mail:
+    host: sandbox.smtp.mailtrap.io
+    port: 2525
+    protocol: smtp
+    username: <your-smtp-username>
+    password: <your-smtp-password>

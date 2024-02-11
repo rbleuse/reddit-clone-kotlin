@@ -11,16 +11,16 @@ import org.springframework.stereotype.Service
 
 @Service
 class MailService(private val javaMailSender: JavaMailSender, private val mailBuilder: MailBuilder) {
-
     @Async
     fun sendEmail(notificationEmail: NotificationEmail) {
-        val messagePreparator = MimeMessagePreparator { mimeMessage ->
-            val messageHelper = MimeMessageHelper(mimeMessage)
-            messageHelper.setFrom("activation@redditclone.com")
-            messageHelper.setTo(notificationEmail.recipient)
-            messageHelper.setSubject(notificationEmail.subject)
-            messageHelper.setText(mailBuilder.build(notificationEmail.body))
-        }
+        val messagePreparator =
+            MimeMessagePreparator { mimeMessage ->
+                val messageHelper = MimeMessageHelper(mimeMessage)
+                messageHelper.setFrom("activation@redditclone.com")
+                messageHelper.setTo(notificationEmail.recipient)
+                messageHelper.setSubject(notificationEmail.subject)
+                messageHelper.setText(mailBuilder.build(notificationEmail.body))
+            }
 
         try {
             javaMailSender.send(messagePreparator)

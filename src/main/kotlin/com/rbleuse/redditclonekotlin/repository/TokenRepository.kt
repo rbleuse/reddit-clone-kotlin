@@ -6,6 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface TokenRepository : JpaRepository<AccountVerificationToken, Long> {
-
     fun findByToken(token: String): AccountVerificationToken?
 }

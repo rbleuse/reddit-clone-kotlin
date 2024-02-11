@@ -14,9 +14,8 @@ import org.springframework.security.web.SecurityFilterChain
 
 @Configuration
 class SecurityConfig(
-    private val userDetailsService: UserDetailsService
+    private val userDetailsService: UserDetailsService,
 ) {
-
     @Bean
     fun web(http: HttpSecurity): SecurityFilterChain {
         http {

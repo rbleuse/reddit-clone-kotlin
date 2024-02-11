@@ -6,7 +6,6 @@ import org.thymeleaf.context.Context
 
 @Component
 class MailBuilder(private val templateEngine: TemplateEngine) {
-
     fun build(message: String): String {
         val context = Context()
         context.setVariable("body", message)

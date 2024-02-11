@@ -22,7 +22,6 @@ bin/
 *.iws
 *.iml
 *.ipr
-.jpb/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
@@ -36,3 +35,8 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Kotlin ###
+.kotlin
+
+src/main/resources/application-local.yml

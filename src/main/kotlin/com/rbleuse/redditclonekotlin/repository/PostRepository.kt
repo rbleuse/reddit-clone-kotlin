@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface PostRepository : JpaRepository<Post, Long> {
-
     fun findBySubreddit(subreddit: Subreddit): List<Post>
 
     fun findByUser(user: User): List<Post>

@@ -13,29 +13,21 @@ import java.time.Instant
 
 @Table(name = "users")
 @Entity
-class User(
-    @NotBlank(message = "Username is required")
-    val username: String,
-
-    @NotBlank(message = "Password is required")
-    val password: String,
-
-    @Email
-    @NotBlank(message = "Email is required")
-    val email: String
-) {
+data class User(
     @Id
     @SequenceGenerator(name = "USER_GEN", sequenceName = "SEQ_USER", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_GEN")
-    var userId: Long? = null
-
-    val creationDate: Instant = Instant.now()
-
-    // FIXME
-    var accountStatus: Boolean = false
-
-    fun isNew(): Boolean = userId == null
-
+    val userId: Long = 0,
+    @NotBlank(message = "Username is required")
+    val username: String,
+    @NotBlank(message = "Password is required")
+    val password: String,
+    @Email
+    @NotBlank(message = "Email is required")
+    val email: String,
+    val accountStatus: Boolean = false,
+    val creationDate: Instant = Instant.now(),
+) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false

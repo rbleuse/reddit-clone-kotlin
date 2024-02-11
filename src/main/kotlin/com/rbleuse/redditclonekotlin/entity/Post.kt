@@ -16,31 +16,24 @@ import java.time.Instant
 
 @Table(name = "post")
 @Entity
-class Post(
+data class Post(
     @Id
     @SequenceGenerator(name = "POST_GEN", sequenceName = "SEQ_POST", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "POST_GEN")
-    val postId: Long,
-
+    val postId: Long = 0,
     @NotBlank(message = "Post Title is required")
     val postTitle: String,
-
     val url: String?,
-
     @Lob
     val description: String?,
-
     val voteCount: Int,
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     val user: User,
-
     val creationDate: Instant,
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id", referencedColumnName = "id")
-    val subreddit: Subreddit
+    val subreddit: Subreddit,
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

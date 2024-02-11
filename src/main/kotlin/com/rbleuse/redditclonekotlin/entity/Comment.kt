@@ -14,23 +14,19 @@ import java.time.Instant
 
 @Table(name = "comment")
 @Entity
-class Comment(
+data class Comment(
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    val id: Long,
-
+    val id: Long = 0,
     @NotEmpty
     val text: String,
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "postId", referencedColumnName = "postId")
     val post: Post,
-
     val creationDate: Instant,
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", referencedColumnName = "userId")
-    val user: User
+    val user: User,
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

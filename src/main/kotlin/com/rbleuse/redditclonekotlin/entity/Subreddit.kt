@@ -15,25 +15,20 @@ import java.time.Instant
 
 @Table(name = "subreddit")
 @Entity
-class Subreddit(
+data class Subreddit(
     @Id
     @SequenceGenerator(name = "SUB_GEN", sequenceName = "SEQ_SUB", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SUB_GEN")
-    val id: Long,
-
+    val id: Long = 0,
     @NotBlank(message = "Subreddit name is required")
     val name: String,
-
     @NotBlank(message = "Subreddit description is required")
     val description: String,
-
     @OneToMany(fetch = FetchType.LAZY)
     val posts: List<Post>? = null,
-
     val creationDate: Instant,
-
     @ManyToOne(fetch = FetchType.LAZY)
-    val user: User
+    val user: User,
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

@@ -27,31 +27,35 @@ class AuthService(
     private val mailService: MailService,
     private val mailBuilder: MailBuilder,
     private val authenticationManager: AuthenticationManager,
-    private val jwtProvider: JWTProvider
+    private val jwtProvider: JWTProvider,
 ) {
-
     @Transactional
     fun register(registerRequest: RegisterRequest) {
-        val user = User(registerRequest.username, encodePassword(registerRequest.password), registerRequest.email)
+        val user =
+            User(username = registerRequest.username, password = encodePassword(registerRequest.password), email = registerRequest.email)
 
         userRepository.save(user)
 
-        val message = mailBuilder.build(
-            """
-              Welcome to React-Spring-Reddit Clone. Please visit the link below to activate you account : $EMAIL_ACTIVATION/${generateToken(user)}
-            """.trimIndent()
-        )
+        val message =
+            mailBuilder.build(
+                """
+                Welcome to React-Spring-Reddit Clone. Please visit the link below to activate you account : $EMAIL_ACTIVATION/${generateToken(
+                    user,
+                )}
+                """.trimIndent(),
+            )
 
         mailService.sendEmail(NotificationEmail("Please Activate Your Account", user.email, message))
     }
 
     fun login(loginRequest: LoginRequest): AuthResponse {
-        val authenticate = authenticationManager.authenticate(
-            UsernamePasswordAuthenticationToken(
-                loginRequest.username,
-                loginRequest.password
+        val authenticate =
+            authenticationManager.authenticate(
+                UsernamePasswordAuthenticationToken(
+                    loginRequest.username,
+                    loginRequest.password,
+                ),
             )
-        )
         SecurityContextHolder.createEmptyContext().authentication = authenticate
         val authToken = jwtProvider.generateToken(authenticate)
         return AuthResponse(authToken, loginRequest.username)
@@ -59,7 +63,7 @@ class AuthService(
 
     fun generateToken(user: User): String {
         val token = UUID.randomUUID().toString()
-        val verificationToken = AccountVerificationToken(token, user)
+        val verificationToken = AccountVerificationToken(token = token, user = user)
 
         tokenRepository.save(verificationToken)
 
@@ -71,19 +75,19 @@ class AuthService(
     }
 
     fun verifyToken(token: String) {
-        val verificationToken = tokenRepository.findByToken(token) ?: throw ActivationException(
-            "Invalid Activation Token"
-        )
+        val verificationToken =
+            tokenRepository.findByToken(token) ?: throw ActivationException(
+                "Invalid Activation Token",
+            )
 
         enableAccount(verificationToken)
     }
 
     fun enableAccount(token: AccountVerificationToken) {
         val username = token.user.username
+
         val user = userRepository.findByUsername(username) ?: throw ActivationException("User not found with username: =$username")
 
-        user.accountStatus = true
-
-        userRepository.save(user)
+        userRepository.save(user.copy(accountStatus = true))
     }
 }

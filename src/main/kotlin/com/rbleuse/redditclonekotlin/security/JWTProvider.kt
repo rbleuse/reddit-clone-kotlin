@@ -24,7 +24,7 @@ class JWTProvider {
 
     fun generateToken(authentication: Authentication): String {
         val principal = authentication.principal as User
-        return Jwts.builder().setSubject(principal.username).signWith(getPrivateKey()).compact()
+        return Jwts.builder().subject(principal.username).signWith(getPrivateKey()).compact()
     }
 
     private fun getPrivateKey(): PrivateKey {

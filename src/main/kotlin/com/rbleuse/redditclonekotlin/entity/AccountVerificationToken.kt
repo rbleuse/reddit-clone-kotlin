@@ -12,18 +12,15 @@ import java.time.Instant
 
 @Table(name = "token")
 @Entity
-class AccountVerificationToken(
-    val token: String,
-
-    @OneToOne(fetch = FetchType.LAZY)
-    val user: User
-) {
+data class AccountVerificationToken(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null
-
-    var expirationDate: Instant? = null
-
+    val id: Long = 0,
+    val token: String,
+    @OneToOne(fetch = FetchType.LAZY)
+    val user: User,
+    val expirationDate: Instant? = null,
+) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
@@ -32,5 +29,5 @@ class AccountVerificationToken(
         return id == other.id
     }
 
-    override fun hashCode(): Int = 303911373
+    override fun hashCode(): Int = 562048008
 }

@@ -12,16 +12,18 @@ import org.springframework.transaction.annotation.Transactional
 import java.util.Collections
 
 @Service
-class UserInformationServiceImpl(private val userRepository: UserRepository) : UserDetailsService {
-
+class UserInformationServiceImpl(
+    private val userRepository: UserRepository,
+) : UserDetailsService {
     private fun fetchAuths(role: String): Collection<GrantedAuthority> {
         return Collections.singletonList(SimpleGrantedAuthority(role))
     }
 
     @Transactional(readOnly = true)
     override fun loadUserByUsername(username: String): UserDetails {
-        val user = userRepository.findByUsername(username)
-            ?: throw UsernameNotFoundException("User not found with username: $username")
+        val user =
+            userRepository.findByUsername(username)
+                ?: throw UsernameNotFoundException("User not found with username: $username")
 
         return User(
             user.username,
@@ -30,7 +32,7 @@ class UserInformationServiceImpl(private val userRepository: UserRepository) : U
             true,
             true,
             true,
-            fetchAuths("USER")
+            fetchAuths("USER"),
         )
     }
 }

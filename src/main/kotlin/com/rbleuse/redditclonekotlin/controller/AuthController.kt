@@ -15,22 +15,27 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/api/auth")
 class AuthController(private val authService: AuthService) {
-
     @PostMapping("/register")
-    fun register(@RequestBody registerRequest: RegisterRequest): ResponseEntity<Any> {
+    fun register(
+        @RequestBody registerRequest: RegisterRequest,
+    ): ResponseEntity<Any> {
         authService.register(registerRequest)
         return ResponseEntity.ok().build()
     }
 
     @GetMapping("/verify/{token}")
-    fun verify(@PathVariable token: String): ResponseEntity<Any> {
+    fun verify(
+        @PathVariable token: String,
+    ): ResponseEntity<String> {
         authService.verifyToken(token)
 
         return ResponseEntity.ok("Account Activated")
     }
 
     @PostMapping("/login")
-    fun login(@RequestBody loginRequest: LoginRequest): AuthResponse {
-        return authService.login(loginRequest)
+    fun login(
+        @RequestBody loginRequest: LoginRequest,
+    ): ResponseEntity<AuthResponse> {
+        return ResponseEntity.ok(authService.login(loginRequest))
     }
 }

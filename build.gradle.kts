@@ -11,13 +11,11 @@ plugins {
 
 group = "com.rbleuse"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_17
+java.sourceCompatibility = JavaVersion.VERSION_21
 
 repositories {
 	mavenCentral()
 }
-
-extra["testcontainersVersion"] = "1.17.6"
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -30,36 +28,30 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 	implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
-	implementation("com.github.javafaker:javafaker:1.0.2")
+	implementation("net.datafaker:datafaker:2.1.0")
 	implementation("io.jsonwebtoken:jjwt-api:0.12.5")
 	implementation("com.github.marlonlom:timeago:4.0.3")
+
+	developmentOnly("org.springframework.boot:spring-boot-docker-compose")
 
 	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.5")
 	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.5")
 	runtimeOnly("org.postgresql:postgresql")
 
-	testImplementation("org.springframework.boot:spring-boot-starter-test") {
-		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
-	}
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.springframework.boot:spring-boot-testcontainers")
 	testImplementation("io.projectreactor:reactor-test")
 	testImplementation("org.springframework.security:spring-security-test")
 	testImplementation("org.testcontainers:junit-jupiter")
 	testImplementation("org.testcontainers:postgresql")
 }
 
-dependencyManagement {
-	imports {
-		mavenBom("org.testcontainers:testcontainers-bom:${property("testcontainersVersion")}")
-	}
-}
-
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
-		jvmTarget = "17"
+		jvmTarget = "21"
 	}
 }
 

@@ -11,25 +11,23 @@ import jakarta.persistence.Table
 import org.hibernate.Hibernate
 
 enum class VoteType(direction: Int) {
-    UPVOTE(1), DOWNVOTE(-1)
+    UPVOTE(1),
+    DOWNVOTE(-1),
 }
 
 @Entity
 @Table(name = "vote")
-class Vote(
+data class Vote(
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    val voteId: Long,
-
+    val voteId: Long = 0,
     val voteType: VoteType,
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "postId", referencedColumnName = "postId")
     val post: Post,
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", referencedColumnName = "userId")
-    val user: User
+    val user: User,
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
