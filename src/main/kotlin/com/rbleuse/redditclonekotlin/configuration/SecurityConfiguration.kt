@@ -3,6 +3,7 @@ package com.rbleuse.redditclonekotlin.configuration
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.core.io.Resource
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
@@ -18,17 +19,18 @@ import java.security.PrivateKey
 @Configuration
 class SecurityConfiguration(
     private val userDetailsService: UserDetailsService,
-    @Value("\${jwt.secret}") private val secret: String,
+    @Value("\${jwt.secret}") private val jwtSecret: String,
+    @Value("\${jwt.keystore}") private val jwtKeystore: Resource,
 ) {
-    private val secretArray = secret.toCharArray()
-    private val resourceStream = this.javaClass.getResourceAsStream("/keystore.jks")
+    private val secretArray = jwtSecret.toCharArray()
 
     @Bean
     fun privateKey(): PrivateKey {
-        val keystore = KeyStore.getInstance("JKS")
-        keystore.load(resourceStream, secretArray)
-
-        return keystore.getKey("alias", secretArray) as PrivateKey
+        return jwtKeystore.inputStream.use { stream ->
+            KeyStore.getInstance(KeyStore.getDefaultType()).apply {
+                load(stream, secretArray)
+            }.getKey("alias", secretArray) as PrivateKey
+        }
     }
 
     @Bean
