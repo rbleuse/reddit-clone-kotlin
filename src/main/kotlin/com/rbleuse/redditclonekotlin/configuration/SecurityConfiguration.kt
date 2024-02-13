@@ -1,5 +1,6 @@
-package com.rbleuse.redditclonekotlin.config
+package com.rbleuse.redditclonekotlin.configuration
 
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
@@ -11,13 +12,27 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
+import java.security.KeyStore
+import java.security.PrivateKey
 
 @Configuration
-class SecurityConfig(
+class SecurityConfiguration(
     private val userDetailsService: UserDetailsService,
+    @Value("\${jwt.secret}") private val secret: String,
 ) {
+    private val secretArray = secret.toCharArray()
+    private val resourceStream = this.javaClass.getResourceAsStream("/keystore.jks")
+
     @Bean
-    fun web(http: HttpSecurity): SecurityFilterChain {
+    fun privateKey(): PrivateKey {
+        val keystore = KeyStore.getInstance("JKS")
+        keystore.load(resourceStream, secretArray)
+
+        return keystore.getKey("alias", secretArray) as PrivateKey
+    }
+
+    @Bean
+    fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http {
             csrf { disable() }
             authorizeRequests {
@@ -35,17 +50,20 @@ class SecurityConfig(
     }
 
     @Bean
-    fun authProvider(): DaoAuthenticationProvider {
-        val authProvider = DaoAuthenticationProvider()
-        authProvider.setUserDetailsService(userDetailsService)
-        authProvider.setPasswordEncoder(passwordEncoder())
-        return authProvider
+    fun authProvider(passwordEncoder: PasswordEncoder): DaoAuthenticationProvider {
+        return DaoAuthenticationProvider().apply {
+            setUserDetailsService(userDetailsService)
+            setPasswordEncoder(passwordEncoder)
+        }
     }
 
     @Bean
-    fun authManager(http: HttpSecurity): AuthenticationManager {
+    fun authManager(
+        http: HttpSecurity,
+        authProvider: DaoAuthenticationProvider,
+    ): AuthenticationManager {
         return http.getSharedObject(AuthenticationManagerBuilder::class.java)
-            .authenticationProvider(authProvider())
+            .authenticationProvider(authProvider)
             .build()
     }
 }

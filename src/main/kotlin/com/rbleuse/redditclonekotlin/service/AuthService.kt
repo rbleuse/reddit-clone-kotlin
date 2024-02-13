@@ -1,6 +1,6 @@
 package com.rbleuse.redditclonekotlin.service
 
-import com.rbleuse.redditclonekotlin.config.EMAIL_ACTIVATION
+import com.rbleuse.redditclonekotlin.EMAIL_ACTIVATION
 import com.rbleuse.redditclonekotlin.dto.AuthResponse
 import com.rbleuse.redditclonekotlin.dto.LoginRequest
 import com.rbleuse.redditclonekotlin.dto.RegisterRequest

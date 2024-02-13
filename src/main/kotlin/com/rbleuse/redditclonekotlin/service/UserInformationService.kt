@@ -1,4 +1,4 @@
-package com.rbleuse.redditclonekotlin.service.impl
+package com.rbleuse.redditclonekotlin.service
 
 import com.rbleuse.redditclonekotlin.repository.UserRepository
 import org.springframework.security.core.GrantedAuthority
@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional
 import java.util.Collections
 
 @Service
-class UserInformationServiceImpl(
+class UserInformationService(
     private val userRepository: UserRepository,
 ) : UserDetailsService {
     private fun fetchAuths(role: String): Collection<GrantedAuthority> {
