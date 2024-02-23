@@ -35,7 +35,7 @@ dependencies {
 	implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
 	implementation("net.datafaker:datafaker:2.1.0")
 	implementation("io.jsonwebtoken:jjwt-api:0.12.5")
-	implementation("com.github.marlonlom:timeago:4.0.3")
+	implementation("org.ocpsoft.prettytime:prettytime:5.0.7.Final")
 
 	developmentOnly("org.springframework.boot:spring-boot-docker-compose")
 
