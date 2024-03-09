@@ -43,5 +43,5 @@ data class Post(
         return postId == other.postId
     }
 
-    override fun hashCode(): Int = 949848249
+    override fun hashCode(): Int = this::class.hashCode()
 }

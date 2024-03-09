@@ -38,5 +38,5 @@ data class Subreddit(
         return id == other.id
     }
 
-    override fun hashCode(): Int = 368711113
+    override fun hashCode(): Int = this::class.hashCode()
 }

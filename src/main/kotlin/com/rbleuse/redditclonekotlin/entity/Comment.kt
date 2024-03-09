@@ -36,5 +36,5 @@ data class Comment(
         return id == other.id
     }
 
-    override fun hashCode(): Int = 860659860
+    override fun hashCode(): Int = this::class.hashCode()
 }

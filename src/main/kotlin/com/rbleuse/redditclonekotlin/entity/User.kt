@@ -36,5 +36,5 @@ data class User(
         return userId == other.userId
     }
 
-    override fun hashCode(): Int = 562048007
+    override fun hashCode(): Int = this::class.hashCode()
 }

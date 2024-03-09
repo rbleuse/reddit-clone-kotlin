@@ -29,5 +29,5 @@ data class AccountVerificationToken(
         return id == other.id
     }
 
-    override fun hashCode(): Int = 562048008
+    override fun hashCode(): Int = this::class.hashCode()
 }

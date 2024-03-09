@@ -37,5 +37,5 @@ data class Vote(
         return voteId == other.voteId
     }
 
-    override fun hashCode(): Int = 1634544760
+    override fun hashCode(): Int = this::class.hashCode()
 }
