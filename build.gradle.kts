@@ -10,7 +10,7 @@ plugins {
 	id("org.jmailen.kotlinter") version "4.2.0"
 }
 
-group = "com.rbleuse"
+group = "com.github.rbleuse"
 version = "0.0.1-SNAPSHOT"
 
 java {
