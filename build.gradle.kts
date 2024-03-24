@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
 	val kotlinVersion = "2.0.0-Beta5"
@@ -53,10 +53,10 @@ dependencies {
 	testImplementation("org.testcontainers:postgresql")
 }
 
-tasks.withType<KotlinCompile> {
-	kotlinOptions {
-		freeCompilerArgs += "-Xjsr305=strict"
-		jvmTarget = "21"
+kotlin {
+	compilerOptions {
+		freeCompilerArgs = freeCompilerArgs.get() + "-Xjsr305=strict"
+		jvmTarget = JvmTarget.JVM_21
 	}
 }
 
