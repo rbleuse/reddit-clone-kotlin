@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Update wrapper permission
-        run: chmod +x gradlew
+      - name: Download dependencies
+        run: ./gradlew dependencies
       - name: Update Gradle Wrapper
         uses: gradle-update/update-gradle-wrapper-action@v1
