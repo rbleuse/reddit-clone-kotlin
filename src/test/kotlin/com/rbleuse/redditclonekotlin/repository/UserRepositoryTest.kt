@@ -26,7 +26,7 @@ class UserRepositoryTest
         }
 
         @Test
-        fun `When findByUsername then return User`() {
+        fun `When calling findByUsername then return User`() {
             val userInDB = User(username = "username", password = "password", email = "test@test.fr")
             userRepository.save(userInDB)
 
