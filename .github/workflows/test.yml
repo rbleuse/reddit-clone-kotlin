@@ -2,29 +2,52 @@ name: test
 
 on:
   push:
-    branches: [main]
+    branches: [main, actions]
   pull_request:
     branches: [main]
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version: '21'
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-      - run: ./gradlew test
   test-with-container:
-    needs: test
     runs-on: ubuntu-latest
     container:
       image: azul/zulu-openjdk-alpine:21.0.2
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
+      - name: gradle cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+          key: gradle-cache-{{ checksum "build.gradle" }}
+          restore-keys: |
+            gradle-cache-{{ checksum "build.gradle" }}
+
+      - name: gradle wrapper cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/wrapper
+          key: gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+          restore-keys: |
+            gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+
+      - name: Gradle dependencies
+        run: |
+          ./gradlew dependencies
+
+      - name: cache gradle packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-cache-{{ checksum "build.gradle" }}
+
+      - uses: actions/cache/save@v3
+        id: cache
+        with:
+          path:
+            ~/.gradle/caches/
+            ~/.gradle/wrapper/
+          key: gradle-cache-{{ checksum "build.gradle" }}
       - run: ./gradlew test
