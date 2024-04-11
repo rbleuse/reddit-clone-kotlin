@@ -16,14 +16,9 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: |
-            .gradle/caches
-            .gradle/wrapper
+            /root/.gradle/caches
+            /root/.gradle/wrapper
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
       - run: ./gradlew test
-      - run: |
-          ls -a .gradle
-          ls -a ~
-          ls -a /root
-          tree -d /root
