@@ -12,6 +12,8 @@ jobs:
     container:
       image: azul/zulu-openjdk-alpine:21.0.2
     steps:
+      - name: add tar used for caching
+        run: apk add --no-cache tar
       - uses: actions/checkout@v4
       - uses: actions/cache@v3
         with:
