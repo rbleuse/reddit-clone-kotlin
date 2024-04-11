@@ -20,7 +20,7 @@ jobs:
         with:
           path: |
             /root/.gradle/caches
-          key: ${{ runner.os }}-gradle-cache-${{ checksum 'build.gradle*' }}
+          key: ${{ runner.os }}-gradle-cache-${{ hashFiles('build.gradle*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-cache-
       - name: setup gradle wrapper cache
@@ -28,7 +28,7 @@ jobs:
         with:
           path: |
             /root/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-wrapper-${{ checksum 'gradle/wrapper/gradle-wrapper.properties' }}
+          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-wrapper-
       - run: ./gradlew test
