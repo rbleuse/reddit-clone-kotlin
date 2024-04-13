@@ -1,2 +1,3 @@
 logging.level:
-  org.testcontainers: DEBUG
+  com.github.dockerjava: INFO
+  org.testcontainers: INFO
