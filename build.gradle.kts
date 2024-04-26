@@ -35,7 +35,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 	implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
-	implementation("net.datafaker:datafaker:2.2.1")
+	implementation("net.datafaker:datafaker:2.2.2")
 	implementation("io.jsonwebtoken:jjwt-api:$jjwtVersion")
 	implementation("org.ocpsoft.prettytime:prettytime:5.0.7.Final")
 
