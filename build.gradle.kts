@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-	val kotlinVersion = "2.0.0-RC1"
+	val kotlinVersion = "2.0.0-RC2"
 	id("org.springframework.boot") version "3.2.5"
 	id("io.spring.dependency-management") version "1.1.4"
 	kotlin("jvm") version kotlinVersion
