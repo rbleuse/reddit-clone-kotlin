@@ -14,7 +14,9 @@ group = "com.github.rbleuse"
 version = "0.0.1-SNAPSHOT"
 
 java {
-	sourceCompatibility = JavaVersion.VERSION_21
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(21)
+  }
 }
 
 repositories {
@@ -54,13 +56,11 @@ dependencies {
 }
 
 kotlin {
-	compilerOptions {
-		freeCompilerArgs = freeCompilerArgs.get() + "-Xjsr305=strict"
-		jvmTarget = JvmTarget.JVM_21
-	}
+  compilerOptions {
+    freeCompilerArgs.addAll("-Xjsr305=strict")
+  }
 }
 
 tasks.withType<Test> {
 	useJUnitPlatform()
-	testLogging.showStandardStreams = true
 }
