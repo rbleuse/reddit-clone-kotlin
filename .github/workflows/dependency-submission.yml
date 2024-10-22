@@ -1,0 +1,15 @@
+on:
+  push:
+    branches: [main]
+
+jobs:
+  dependencies:
+    runs-on: ubuntu-latest
+    container:
+      image: azul/zulu-openjdk-alpine:21.0.4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate and submit dependency graph
+        uses: gradle/actions/dependency-submission@v4
+        with:
+          dependency-graph: generate-and-submit
