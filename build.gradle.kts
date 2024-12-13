@@ -7,7 +7,7 @@ plugins {
 	kotlin("jvm") version kotlinVersion
 	kotlin("plugin.spring") version kotlinVersion
 	kotlin("plugin.jpa") version kotlinVersion
-	id("org.jmailen.kotlinter") version "5.0.0"
+	id("org.jmailen.kotlinter") version "5.0.1"
 }
 
 group = "com.github.rbleuse"
