@@ -8,7 +8,7 @@ import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
-import org.hibernate.Hibernate
+import org.hibernate.proxy.HibernateProxy
 
 enum class VoteType(direction: Int) {
     UPVOTE(1),
@@ -29,13 +29,25 @@ data class Vote(
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     val user: User,
 ) {
-    override fun equals(other: Any?): Boolean {
+    final override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
+        if (other == null) return false
+        val oEffectiveClass =
+            if (other is HibernateProxy) other.hibernateLazyInitializer.persistentClass else other.javaClass
+        val thisEffectiveClass =
+            if (this is HibernateProxy) this.hibernateLazyInitializer.persistentClass else this.javaClass
+        if (thisEffectiveClass != oEffectiveClass) return false
         other as Vote
 
         return voteId == other.voteId
     }
 
-    override fun hashCode(): Int = this::class.hashCode()
+    final override fun hashCode(): Int =
+        if (this is HibernateProxy) this.hibernateLazyInitializer.persistentClass.hashCode() else javaClass.hashCode()
+
+    @Override
+    override fun toString(): String {
+        return this::class.simpleName + "(  voteId = $voteId   ,   voteType = $voteType )"
+    }
+
 }

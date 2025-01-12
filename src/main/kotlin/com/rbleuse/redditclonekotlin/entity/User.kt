@@ -8,7 +8,7 @@ import jakarta.persistence.SequenceGenerator
 import jakarta.persistence.Table
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank
-import org.hibernate.Hibernate
+import org.hibernate.proxy.HibernateProxy
 import java.time.Instant
 
 @Table(name = "users")
@@ -28,13 +28,25 @@ data class User(
     val accountStatus: Boolean = false,
     val creationDate: Instant = Instant.now(),
 ) {
-    override fun equals(other: Any?): Boolean {
+    final override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
+        if (other == null) return false
+        val oEffectiveClass =
+            if (other is HibernateProxy) other.hibernateLazyInitializer.persistentClass else other.javaClass
+        val thisEffectiveClass =
+            if (this is HibernateProxy) this.hibernateLazyInitializer.persistentClass else this.javaClass
+        if (thisEffectiveClass != oEffectiveClass) return false
         other as User
 
         return userId == other.userId
     }
 
-    override fun hashCode(): Int = this::class.hashCode()
+    final override fun hashCode(): Int =
+        if (this is HibernateProxy) this.hibernateLazyInitializer.persistentClass.hashCode() else javaClass.hashCode()
+
+    @Override
+    override fun toString(): String {
+        return this::class.simpleName + "(  userId = $userId   ,   username = $username   ,   password = $password   ,   email = $email   ,   accountStatus = $accountStatus   ,   creationDate = $creationDate )"
+    }
+
 }

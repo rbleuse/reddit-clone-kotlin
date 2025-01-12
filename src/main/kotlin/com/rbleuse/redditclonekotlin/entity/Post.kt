@@ -11,7 +11,7 @@ import jakarta.persistence.ManyToOne
 import jakarta.persistence.SequenceGenerator
 import jakarta.persistence.Table
 import jakarta.validation.constraints.NotBlank
-import org.hibernate.Hibernate
+import org.hibernate.proxy.HibernateProxy
 import java.time.Instant
 
 @Table(name = "post")
@@ -35,13 +35,25 @@ data class Post(
     @JoinColumn(name = "id", referencedColumnName = "id")
     val subreddit: Subreddit,
 ) {
-    override fun equals(other: Any?): Boolean {
+    final override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
+        if (other == null) return false
+        val oEffectiveClass =
+            if (other is HibernateProxy) other.hibernateLazyInitializer.persistentClass else other.javaClass
+        val thisEffectiveClass =
+            if (this is HibernateProxy) this.hibernateLazyInitializer.persistentClass else this.javaClass
+        if (thisEffectiveClass != oEffectiveClass) return false
         other as Post
 
         return postId == other.postId
     }
 
-    override fun hashCode(): Int = this::class.hashCode()
+    final override fun hashCode(): Int =
+        if (this is HibernateProxy) this.hibernateLazyInitializer.persistentClass.hashCode() else javaClass.hashCode()
+
+    @Override
+    override fun toString(): String {
+        return this::class.simpleName + "(  postId = $postId   ,   creationDate = $creationDate   ,   voteCount = $voteCount   ,   description = $description   ,   url = $url   ,   postTitle = $postTitle )"
+    }
+
 }

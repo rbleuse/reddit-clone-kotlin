@@ -37,7 +37,7 @@ class SecurityConfiguration(
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http {
             csrf { disable() }
-            authorizeRequests {
+            authorizeHttpRequests {
                 authorize("/api/auth/**", permitAll)
                 authorize(anyRequest, authenticated)
             }
