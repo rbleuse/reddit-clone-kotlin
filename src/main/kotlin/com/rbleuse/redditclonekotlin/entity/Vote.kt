@@ -10,7 +10,9 @@ import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
 import org.hibernate.proxy.HibernateProxy
 
-enum class VoteType(direction: Int) {
+enum class VoteType(
+    direction: Int,
+) {
     UPVOTE(1),
     DOWNVOTE(-1),
 }
@@ -46,8 +48,5 @@ data class Vote(
         if (this is HibernateProxy) this.hibernateLazyInitializer.persistentClass.hashCode() else javaClass.hashCode()
 
     @Override
-    override fun toString(): String {
-        return this::class.simpleName + "(  voteId = $voteId   ,   voteType = $voteType )"
-    }
-
+    override fun toString(): String = this::class.simpleName + "(  voteId = $voteId   ,   voteType = $voteType )"
 }

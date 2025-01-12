@@ -10,7 +10,10 @@ import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Service
 
 @Service
-class MailService(private val javaMailSender: JavaMailSender, private val mailBuilder: MailBuilder) {
+class MailService(
+    private val javaMailSender: JavaMailSender,
+    private val mailBuilder: MailBuilder,
+) {
     @Async
     fun sendEmail(notificationEmail: NotificationEmail) {
         val messagePreparator =

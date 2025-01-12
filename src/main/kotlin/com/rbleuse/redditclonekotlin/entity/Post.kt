@@ -52,8 +52,7 @@ data class Post(
         if (this is HibernateProxy) this.hibernateLazyInitializer.persistentClass.hashCode() else javaClass.hashCode()
 
     @Override
-    override fun toString(): String {
-        return this::class.simpleName + "(  postId = $postId   ,   creationDate = $creationDate   ,   voteCount = $voteCount   ,   description = $description   ,   url = $url   ,   postTitle = $postTitle )"
-    }
-
+    override fun toString(): String =
+        this::class.simpleName +
+            "(  postId = $postId   ,   creationDate = $creationDate   ,   voteCount = $voteCount   ,   description = $description   ,   url = $url   ,   postTitle = $postTitle )"
 }

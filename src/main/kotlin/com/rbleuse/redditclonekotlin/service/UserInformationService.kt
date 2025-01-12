@@ -15,9 +15,7 @@ import java.util.Collections
 class UserInformationService(
     private val userRepository: UserRepository,
 ) : UserDetailsService {
-    private fun fetchAuths(role: String): Collection<GrantedAuthority> {
-        return Collections.singletonList(SimpleGrantedAuthority(role))
-    }
+    private fun fetchAuths(role: String): Collection<GrantedAuthority> = Collections.singletonList(SimpleGrantedAuthority(role))
 
     @Transactional(readOnly = true)
     override fun loadUserByUsername(username: String): UserDetails {

@@ -45,8 +45,7 @@ data class User(
         if (this is HibernateProxy) this.hibernateLazyInitializer.persistentClass.hashCode() else javaClass.hashCode()
 
     @Override
-    override fun toString(): String {
-        return this::class.simpleName + "(  userId = $userId   ,   username = $username   ,   password = $password   ,   email = $email   ,   accountStatus = $accountStatus   ,   creationDate = $creationDate )"
-    }
-
+    override fun toString(): String =
+        this::class.simpleName +
+            "(  userId = $userId   ,   username = $username   ,   password = $password   ,   email = $email   ,   accountStatus = $accountStatus   ,   creationDate = $creationDate )"
 }

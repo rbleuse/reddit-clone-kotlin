@@ -45,8 +45,5 @@ data class Comment(
         if (this is HibernateProxy) this.hibernateLazyInitializer.persistentClass.hashCode() else javaClass.hashCode()
 
     @Override
-    override fun toString(): String {
-        return this::class.simpleName + "(  id = $id   ,   text = $text   ,   creationDate = $creationDate )"
-    }
-
+    override fun toString(): String = this::class.simpleName + "(  id = $id   ,   text = $text   ,   creationDate = $creationDate )"
 }

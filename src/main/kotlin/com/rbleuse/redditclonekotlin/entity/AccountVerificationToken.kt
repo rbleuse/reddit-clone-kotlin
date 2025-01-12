@@ -38,8 +38,5 @@ data class AccountVerificationToken(
         if (this is HibernateProxy) this.hibernateLazyInitializer.persistentClass.hashCode() else javaClass.hashCode()
 
     @Override
-    override fun toString(): String {
-        return this::class.simpleName + "(  id = $id   ,   token = $token   ,   expirationDate = $expirationDate )"
-    }
-
+    override fun toString(): String = this::class.simpleName + "(  id = $id   ,   token = $token   ,   expirationDate = $expirationDate )"
 }

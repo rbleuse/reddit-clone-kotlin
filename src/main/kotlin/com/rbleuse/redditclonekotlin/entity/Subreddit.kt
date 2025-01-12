@@ -47,8 +47,7 @@ data class Subreddit(
         if (this is HibernateProxy) this.hibernateLazyInitializer.persistentClass.hashCode() else javaClass.hashCode()
 
     @Override
-    override fun toString(): String {
-        return this::class.simpleName + "(  id = $id   ,   name = $name   ,   description = $description   ,   creationDate = $creationDate )"
-    }
-
+    override fun toString(): String =
+        this::class.simpleName +
+            "(  id = $id   ,   name = $name   ,   description = $description   ,   creationDate = $creationDate )"
 }

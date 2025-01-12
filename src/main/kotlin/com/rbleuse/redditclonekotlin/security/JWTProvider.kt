@@ -23,7 +23,5 @@ class JWTProvider(
             .compact()
     }
 
-    private infix operator fun Date.plus(milliseconds: Long): Date {
-        return Date(time + milliseconds)
-    }
+    private infix operator fun Date.plus(milliseconds: Long): Date = Date(time + milliseconds)
 }

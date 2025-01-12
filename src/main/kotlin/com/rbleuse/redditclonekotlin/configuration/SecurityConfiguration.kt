@@ -25,13 +25,14 @@ class SecurityConfiguration(
     private val secretArray = jwtSecret.toCharArray()
 
     @Bean
-    fun privateKey(): PrivateKey {
-        return jwtKeystore.inputStream.use { stream ->
-            KeyStore.getInstance(KeyStore.getDefaultType()).apply {
-                load(stream, secretArray)
-            }.getKey("alias", secretArray) as PrivateKey
+    fun privateKey(): PrivateKey =
+        jwtKeystore.inputStream.use { stream ->
+            KeyStore
+                .getInstance(KeyStore.getDefaultType())
+                .apply {
+                    load(stream, secretArray)
+                }.getKey("alias", secretArray) as PrivateKey
         }
-    }
 
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
@@ -47,25 +48,22 @@ class SecurityConfiguration(
     }
 
     @Bean
-    fun passwordEncoder(): PasswordEncoder {
-        return BCryptPasswordEncoder()
-    }
+    fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
 
     @Bean
-    fun authProvider(passwordEncoder: PasswordEncoder): DaoAuthenticationProvider {
-        return DaoAuthenticationProvider().apply {
+    fun authProvider(passwordEncoder: PasswordEncoder): DaoAuthenticationProvider =
+        DaoAuthenticationProvider().apply {
             setUserDetailsService(userDetailsService)
             setPasswordEncoder(passwordEncoder)
         }
-    }
 
     @Bean
     fun authManager(
         http: HttpSecurity,
         authProvider: DaoAuthenticationProvider,
-    ): AuthenticationManager {
-        return http.getSharedObject(AuthenticationManagerBuilder::class.java)
+    ): AuthenticationManager =
+        http
+            .getSharedObject(AuthenticationManagerBuilder::class.java)
             .authenticationProvider(authProvider)
             .build()
-    }
 }

@@ -70,9 +70,7 @@ class AuthService(
         return token
     }
 
-    private fun encodePassword(password: String): String {
-        return passwordEncoder.encode(password)
-    }
+    private fun encodePassword(password: String): String = passwordEncoder.encode(password)
 
     fun verifyToken(token: String) {
         val verificationToken =

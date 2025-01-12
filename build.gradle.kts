@@ -69,6 +69,10 @@ allOpen {
 	annotation("jakarta.persistence.Embeddable")
 }
 
+tasks.check {
+	dependsOn("installKotlinterPrePushHook")
+}
+
 tasks.withType<Test> {
 	useJUnitPlatform()
 }

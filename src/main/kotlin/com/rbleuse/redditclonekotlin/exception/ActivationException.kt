@@ -1,3 +1,5 @@
 package com.rbleuse.redditclonekotlin.exception
 
-class ActivationException(message: String) : RuntimeException(message)
+class ActivationException(
+    message: String,
+) : RuntimeException(message)
