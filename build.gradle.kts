@@ -40,7 +40,7 @@ dependencies {
 	implementation("net.datafaker:datafaker:2.4.3")
 	implementation("io.jsonwebtoken:jjwt-api:$jjwtVersion")
 	implementation("org.ocpsoft.prettytime:prettytime:5.0.9.Final")
-        implementation("com.zaxxer:HikariCP:6.3.0")
+        implementation("com.zaxxer:HikariCP:6.3.2")
 
 	developmentOnly("org.springframework.boot:spring-boot-docker-compose")
 
