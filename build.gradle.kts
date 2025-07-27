@@ -23,6 +23,10 @@ repositories {
 	mavenCentral()
 }
 
+ext {
+    set("hikaricp.version", "6.3.2")
+}
+
 dependencies {
 	val jjwtVersion = "0.12.6"
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -40,7 +44,6 @@ dependencies {
 	implementation("net.datafaker:datafaker:2.4.3")
 	implementation("io.jsonwebtoken:jjwt-api:$jjwtVersion")
 	implementation("org.ocpsoft.prettytime:prettytime:5.0.9.Final")
-        implementation("com.zaxxer:HikariCP:6.3.0")
 
 	developmentOnly("org.springframework.boot:spring-boot-docker-compose")
 
