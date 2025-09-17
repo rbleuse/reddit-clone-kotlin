@@ -28,7 +28,7 @@ ext {
 }
 
 dependencies {
-	val jjwtVersion = "0.12.7"
+	val jjwtVersion = "0.13.0"
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
 	implementation("org.springframework.boot:spring-boot-starter-mail")
