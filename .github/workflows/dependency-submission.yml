@@ -12,6 +12,6 @@ jobs:
       - name: add tar used for caching
         run: apk add --no-cache tar
       - name: Generate and submit dependency graph
-        uses: gradle/actions/dependency-submission@v4
+        uses: gradle/actions/dependency-submission@v6
         with:
           dependency-graph: generate-and-submit
