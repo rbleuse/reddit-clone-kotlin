@@ -10,7 +10,7 @@ jobs:
   test-with-container:
     runs-on: ubuntu-latest
     container:
-      image: azul/zulu-openjdk-alpine:21.0.4
+      image: azul/zulu-openjdk-alpine:25.0.1
     steps:
       - name: add tar used for caching
         run: apk add --no-cache tar
