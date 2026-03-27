@@ -8,7 +8,7 @@ jobs:
     container:
       image: azul/zulu-openjdk-alpine:21.0.4
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: add tar used for caching
         run: apk add --no-cache tar
       - name: Generate and submit dependency graph
