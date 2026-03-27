@@ -6,7 +6,7 @@ jobs:
   dependencies:
     runs-on: ubuntu-latest
     container:
-      image: azul/zulu-openjdk-alpine:21.0.4
+      image: azul/zulu-openjdk-alpine:25.0.1
     steps:
       - uses: actions/checkout@v6
       - name: add tar used for caching
