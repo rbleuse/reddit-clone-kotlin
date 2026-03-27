@@ -24,7 +24,7 @@ class UserRepositoryTest
         companion object {
             @Container
             @ServiceConnection
-            val postgreSQLContainer = PostgreSQLContainer("postgres:18.3-alpine3.23")
+            val postgresContainer = PostgreSQLContainer("postgres:18.3-alpine3.23")
         }
 
         @Test
