@@ -13,16 +13,12 @@ version = "0.0.1-SNAPSHOT"
 
 java {
   toolchain {
-    languageVersion = JavaLanguageVersion.of(21)
+    languageVersion = JavaLanguageVersion.of(25)
   }
 }
 
 repositories {
 	mavenCentral()
-}
-
-ext {
-    set("hikaricp.version", "6.3.2")
 }
 
 dependencies {
@@ -57,12 +53,6 @@ dependencies {
     testImplementation("org.testcontainers:testcontainers-junit-jupiter")
     testImplementation("org.testcontainers:testcontainers-postgresql")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-}
-
-kotlin {
-  compilerOptions {
-    freeCompilerArgs.addAll("-Xjsr305=strict")
-  }
 }
 
 allOpen {
